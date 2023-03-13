@@ -86,3 +86,45 @@ def test_add_one_entry_and_return_reading_chunk():
     entry_1 = DiaryEntry("Title 1", "This is the first diary entry into the diary")
     diary.add(entry_1)
     assert entry_1.reading_chunk(3,1) == "This is the"
+
+"""
+Given 1 entry added
+Return muliple reading chunks that the user could read in the given minutes
+"""
+def test_add_one_entry_and_return_multiple_reading_chunk():
+    diary = Diary()
+    entry_1 = DiaryEntry("Title 1", "This is the first diary entry into the diary")
+    diary.add(entry_1)
+    assert entry_1.reading_chunk(3,1) == "This is the"
+    assert entry_1.reading_chunk(3,1) == "first diary entry"
+
+"""
+Given 1 entry added
+Return muliple reading chunks over the length of the available conntenst that the user could read in the given minutes
+Ensuring when the end of the contents is reached it goes back to the beginning
+"""
+def test_add_one_entry_and_return_multiple_reading_chunk_over_length_of_contents():
+    diary = Diary()
+    entry_1 = DiaryEntry("Title 1", "This is the first diary entry into the diary")
+    diary.add(entry_1)
+    assert entry_1.reading_chunk(3,1) == "This is the"
+    assert entry_1.reading_chunk(3,1) == "first diary entry"
+    assert entry_1.reading_chunk(2,2) == "into the diary"
+    assert entry_1.reading_chunk(2,2) == "This is the first"
+
+"""
+Given 2 entris added
+Return muliple reading chunks over the length of the available conntenst that the user could read in the given minutes
+Ensuring when the end of the contents is reached it goes back to the beginning
+"""
+def test_add_multi_entries_and_return_multiple_reading_chunk_over_length_of_contents():
+    diary = Diary()
+    entry_1 = DiaryEntry("Title 1", "This is the first diary entry into the diary")
+    entry_2 = DiaryEntry("Title 2", "This is the second diary entry")
+    diary.add(entry_1)
+    assert entry_1.reading_chunk(3,1) == "This is the"
+    assert entry_1.reading_chunk(3,1) == "first diary entry"
+    assert entry_1.reading_chunk(2,2) == "into the diary"
+    assert entry_1.reading_chunk(2,2) == "This is the first"
+    assert entry_2.reading_chunk(5,5) == "This is the second diary entry"
+    assert entry_2.reading_chunk(1,4) == "This is the second"

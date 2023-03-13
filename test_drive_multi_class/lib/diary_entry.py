@@ -8,6 +8,7 @@ class DiaryEntry:
         #   Sets the title and contents properties
         self.title = title
         self.contents = contents
+        self.words_read_so_far = 0
 
     def count_words(self):
         # Returns:
@@ -39,5 +40,8 @@ class DiaryEntry:
         # The next call after that it should restart from the beginning.
 
         words_can_read = wpm * minutes
-        print(self.contents)
-        return words_can_read
+        if self.words_read_so_far >= len(self.contents.split()):
+            self.words_read_so_far = 0
+        chunk_to_read = " ".join(self.contents.split()[self.words_read_so_far:self.words_read_so_far + words_can_read])
+        self.words_read_so_far += words_can_read
+        return chunk_to_read

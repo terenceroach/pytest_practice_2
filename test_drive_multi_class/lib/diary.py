@@ -16,7 +16,6 @@ class Diary:
     def all(self):
         # Returns:
         #   A list of instances of DiaryEntry
-        print(self._entries)
         return self._entries
 
     def count_words(self):
