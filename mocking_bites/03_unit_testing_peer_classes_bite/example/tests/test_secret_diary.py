@@ -50,3 +50,10 @@ def test_unlock_and_lock_again_diary_and_is_locked_equals_true():
     secret_diary.unlock()
     secret_diary.lock()
     assert secret_diary.is_locked == True
+
+def test_content_property():
+    fake_diary = Mock()
+    fake_diary.contents = "A new diary entry"
+    secret_diary = SecretDiary(fake_diary)
+ 
+    assert secret_diary.diary.contents == "A new diary entry"
